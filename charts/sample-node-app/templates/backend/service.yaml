@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.fullnameOverride }}-backend
+spec:
+  selector:
+    app: {{ .Values.fullnameOverride }}-backend
+  ports:
+    - port: {{ .Values.backend.image.port }}
+      targetPort: {{ .Values.backend.image.port }}
+  type: {{ .Values.service.type }}

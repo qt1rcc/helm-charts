@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.fullnameOverride }}-db
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.fullnameOverride }}-db
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.fullnameOverride }}-db
+    spec:
+      containers:
+        - name: app
+          image: {{ .Values.db.image.repository }}:{{ .Values.db.image.tag }}
+          ports:
+            - containerPort: {{ .Values.db.image.port }}
+          imagePullPolicy: IfNotPresent

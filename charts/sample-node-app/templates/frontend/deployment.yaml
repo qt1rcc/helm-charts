@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.fullnameOverride }}-frontend
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.fullnameOverride }}-frontend
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.fullnameOverride }}-frontend
+    spec:
+      containers:
+        - name: app
+          image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
+          ports:
+            - containerPort: {{ .Values.frontend.image.port }}
+          imagePullPolicy: IfNotPresent
+      imagePullSecrets:
+      - name: regcred
