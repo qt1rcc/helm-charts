@@ -3,6 +3,16 @@ entries:
   sample-node-app:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-06-21T07:21:25.143200988Z"
+    description: A Helm chart for Kubernetes
+    digest: deabe9778fbd2651f8dda34fe1a608a900b5c990fded03016fd2419efd69f646
+    name: sample-node-app
+    type: application
+    urls:
+    - https://github.com/Qt1RCC/helm-charts/releases/download/sample-node-app-0.1.4/sample-node-app-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-06-20T20:39:50.537851162Z"
     description: A Helm chart for Kubernetes
     digest: d9e62c3e5c4285c02ba3b49fd23a0e4e255bedf8e2ff2b9da95b199ffba9707e
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://github.com/Qt1RCC/helm-charts/releases/download/sample-node-app-0.1.2/sample-node-app-0.1.2.tgz
     version: 0.1.2
-generated: "2023-06-20T20:39:50.537886761Z"
+generated: "2023-06-21T07:21:25.143210588Z"
