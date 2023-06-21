@@ -1,0 +1,4 @@
+ingress:
+  hosts:
+    frontend: "snapp-front.rct.local"
+    backend: "snapp-back.rct.local"

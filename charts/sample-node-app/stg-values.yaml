@@ -1,0 +1,4 @@
+ingress:
+  hosts:
+    frontend: "snapp-front.staging.local"
+    backend: "snapp-back.staging.local"
