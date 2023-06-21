@@ -9,3 +9,13 @@ autoscaling:
   minReplicas: 1
   maxReplicas: 5
   targetCPUUtilizationPercentage: 80
+
+keel:
+  # keel policy (all/major/minor/patch/force)
+  policy: patch
+  # images to track and update
+  images:
+    - repository: frontend.image.repository
+      tag: frontend.image.tag
+    - repository: backend.image.repository
+      tag: backend.image.tag

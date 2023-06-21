@@ -25,6 +25,16 @@ backend:
     tag: "e7dcc20"
     port: 3000
 
+keel:
+  # keel policy (all/major/minor/patch/force)
+  policy: all
+  # images to track and update
+  images:
+    - repository: frontend.image.repository
+      tag: frontend.image.tag
+    - repository: backend.image.repository
+      tag: backend.image.tag
+
 imagePullSecrets: []
 nameOverride: "sample-node-app"
 fullnameOverride: "sample-node-chart"
