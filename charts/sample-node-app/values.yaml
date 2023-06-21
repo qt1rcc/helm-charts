@@ -15,14 +15,14 @@ frontend:
   image:
     repository: ghcr.io/qt1rcc/sample-node-app-front
     pullPolicy: IfNotPresent
-    tag: "f46e4a1"
+    tag: "e7dcc20"
     port: 80
 
 backend:
   image:
     repository: ghcr.io/qt1rcc/sample-node-app-back
     pullPolicy: IfNotPresent
-    tag: "f46e4a1"
+    tag: "e7dcc20"
     port: 3000
 
 imagePullSecrets: []
