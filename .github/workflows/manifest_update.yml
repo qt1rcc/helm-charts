@@ -58,7 +58,7 @@ jobs:
         uses: christian-draeger/increment-semantic-version@1.1.0
         with:
           current-version: '${{ steps.get_chart_version.outputs.result }}'
-          version-fragment: 'fix'
+          version-fragment: 'bug'
           
       - name: Update Chart version
         uses: fjogeleit/yaml-update-action@main
