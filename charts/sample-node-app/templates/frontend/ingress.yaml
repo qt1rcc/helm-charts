@@ -13,4 +13,4 @@ spec:
             service:
                 name: {{ .Values.fullnameOverride }}-frontend
                 port:
-                  number: {{ .Values.sample-node-app-frontend.image.port }}
+                  number: {{ .Values.sample_node_app_frontend.image.port }}

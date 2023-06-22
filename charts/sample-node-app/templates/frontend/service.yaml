@@ -6,6 +6,6 @@ spec:
   selector:
     app: {{ .Values.fullnameOverride }}-frontend
   ports:
-    - port: {{ .Values.sample-node-app-frontend.image.port }}
-      targetPort: {{ .Values.sample-node-app-frontend.image.port }}
+    - port: {{ .Values.sample_node_app_frontend.image.port }}
+      targetPort: {{ .Values.sample_node_app_frontend.image.port }}
   type: {{ .Values.service.type }}
