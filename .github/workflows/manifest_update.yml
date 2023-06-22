@@ -1,6 +1,14 @@
 name: Manifest auto updater (non-production)
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
 
 jobs:
   release:
