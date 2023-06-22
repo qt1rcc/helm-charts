@@ -45,7 +45,7 @@ jobs:
       - name: Set docker image version
         uses: mikefarah/yq@master
         with:
-          cmd: yq -i '.${{ steps.concat.outputs.concatenateComponentPath }}.image.tag = "${{ github.event.inputs.version }}"' 'charts/${{ github.event.inputs.appName }}/values.yaml'
+          cmd: yq -i '${{ env.CONCATENATEDCOMPONENTPATH }}.image.tag = "${{ github.event.inputs.version }}"' 'charts/${{ github.event.inputs.appName }}/values.yaml'
 
       - name: Get chart current version
         uses: mikefarah/yq@master
@@ -70,6 +70,6 @@ jobs:
           targetBranch: main
           masterBranchName: main
           createPR: true
-          message: '${{ steps.concat.outputs.concatenatedMessageString }}'
+          message: '${{ env.CONCATENATEDMESSAGESTRING }}'
           workDir: 'charts/${{ github.event.inputs.appName }}'
           commitChange: true
