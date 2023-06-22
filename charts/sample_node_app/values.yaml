@@ -13,7 +13,7 @@ sample_node_app_frontend:
   image:
     repository: ghcr.io/qt1rcc/sample-node-app-front
     pullPolicy: IfNotPresent
-    tag: "1.0.0"
+    tag: "0.0.2"
     port: 80
 sample_node_app_backend:
   image:
