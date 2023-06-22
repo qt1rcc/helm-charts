@@ -9,6 +9,9 @@ on:
       version:
         required: true
         type: string
+      appName:
+        required: true
+        type: string
 
 jobs:
   release:
@@ -20,8 +23,27 @@ jobs:
         with:
           fetch-depth: 0
           
-          
       - name: Configure Git
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Update Frontend image version in the related HelmChart values.yaml
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: 'charts/${{ github.event.inputs.appName }}/values.yaml'
+          propertyPath: '${{ github.event.inputs.appName }}-frontend.image.tag'
+          value: ${{ github.event.inputs.version }}
+          branch: main
+          createPR: true
+          message: 'Update Image Version to ${{ github.event.inputs.version }}'
+          
+      - name: Update Backend image version in the related HelmChart values.yaml
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: 'charts/${{ github.event.inputs.appName }}/values.yaml'
+          propertyPath: '${{ github.event.inputs.appName }}-backend.image.tag'
+          value: ${{ github.event.inputs.version }}
+          branch: main
+          createPR: true
+          message: 'Update Image Version to ${{ github.event.inputs.version }}' 
