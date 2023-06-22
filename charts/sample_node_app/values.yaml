@@ -19,7 +19,7 @@ sample_node_app_backend:
   image:
     repository: ghcr.io/qt1rcc/sample-node-app-back
     pullPolicy: IfNotPresent
-    tag: "1.0.0"
+    tag: "0.0.4"
     port: 3000
 imagePullSecrets: []
 nameOverride: "sample-node-app"
