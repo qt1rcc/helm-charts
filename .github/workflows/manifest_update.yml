@@ -1,10 +1,5 @@
 name: Manifest auto updater (non-production)
 
-env:
-  concatenatedMessageString: ''
-  concatenateComponentPath: ''
-  
-
 on:
   workflow_dispatch:
     inputs:
@@ -40,11 +35,11 @@ jobs:
         id: concat
         run: |
           if [ -n "${{ github.event.inputs.appComponent }}" ]; then
-            echo "::set-env concatenatedMessageString='Update ${{ github.event.inputs.appName }}_${{ github.event.inputs.appComponent }} image Version to ${{ github.event.inputs.version }}'"
-            echo "::set-env concatenateComponentPath='${{ github.event.inputs.appName }}_${{ github.event.inputs.appComponent }}'"
+            echo "CONCATENATEDMESSAGESTRING='Update ${{ github.event.inputs.appName }}_${{ github.event.inputs.appComponent }} image Version to ${{ github.event.inputs.version }}'" >> $GITHUB_ENV
+            echo "CONCATENATEDCOMPONENTPATH='${{ github.event.inputs.appName }}_${{ github.event.inputs.appComponent }}'" >> $GITHUB_ENV
           else
-            echo "::set-env concatenatedMessageString='Update ${{ github.event.inputs.appName }} image Version to ${{ github.event.inputs.version }}'"
-            echo "::set-env concatenateComponentPath='${{ github.event.inputs.appName }}'"
+            echo "CONCATENATEDMESSAGESTRING='Update ${{ github.event.inputs.appName }} image Version to ${{ github.event.inputs.version }}'" >> $GITHUB_ENV
+            echo "CONCATENATEDCOMPONENTPATH='${{ github.event.inputs.appName }}'" >> $GITHUB_ENV
           fi
 
       - name: Set docker image version
