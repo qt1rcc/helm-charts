@@ -32,7 +32,7 @@ jobs:
         uses: fjogeleit/yaml-update-action@main
         with:
           valueFile: 'charts/${{ github.event.inputs.appName }}/values.yaml'
-          propertyPath: '${{ github.event.inputs.appName }}-frontend.image.tag'
+          propertyPath: '${{ github.event.inputs.appName }}_frontend.image.tag'
           value: ${{ github.event.inputs.version }}
           branch: main
           createPR: true
@@ -42,7 +42,7 @@ jobs:
         uses: fjogeleit/yaml-update-action@main
         with:
           valueFile: 'charts/${{ github.event.inputs.appName }}/values.yaml'
-          propertyPath: '${{ github.event.inputs.appName }}-backend.image.tag'
+          propertyPath: '${{ github.event.inputs.appName }}_backend.image.tag'
           value: ${{ github.event.inputs.version }}
           branch: main
           createPR: true
