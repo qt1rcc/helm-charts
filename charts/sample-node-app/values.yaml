@@ -11,14 +11,14 @@ db:
     tag: 4.2.0
     port: 27017
 
-sample-node-app-frontend:
+sample_node_app_frontend:
   image:
     repository: ghcr.io/qt1rcc/sample-node-app-front
     pullPolicy: IfNotPresent
     tag: "1.1.0"
     port: 80
 
-sample-node-app-backend:
+sample_node_app_backend:
   image:
     repository: ghcr.io/qt1rcc/sample-node-app-back
     pullPolicy: IfNotPresent
