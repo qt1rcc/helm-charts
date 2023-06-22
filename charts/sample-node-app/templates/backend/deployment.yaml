@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
         - name: app
-          image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}
+          image: {{ .Values.sample-node-app-backend.image.repository }}:{{ .Values.sample-node-app-backend.image.tag }}
           ports:
-            - containerPort: {{ .Values.backend.image.port }}
+            - containerPort: {{ .Values.sample-node-app-backend.image.port }}
           imagePullPolicy: IfNotPresent
       imagePullSecrets:
       - name: regcred
