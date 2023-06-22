@@ -1,6 +1,6 @@
 name: Manifest auto updater (non-production)
 
-on: repository_dispatch
+on: workflow_dispatch
 
 jobs:
   release:
