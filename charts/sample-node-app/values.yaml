@@ -11,29 +11,19 @@ db:
     tag: 4.2.0
     port: 27017
 
-frontend:
+sample-node-app-frontend:
   image:
     repository: ghcr.io/qt1rcc/sample-node-app-front
     pullPolicy: IfNotPresent
     tag: "1.1.0"
     port: 80
 
-backend:
+sample-node-app-backend:
   image:
     repository: ghcr.io/qt1rcc/sample-node-app-back
     pullPolicy: IfNotPresent
     tag: "1.1.0"
     port: 3000
-
-keel:
-  # keel policy (all/major/minor/patch/force)
-  policy: all
-  # images to track and update
-  images:
-    - repository: frontend.image.repository
-      tag: frontend.image.tag
-    - repository: backend.image.repository
-      tag: backend.image.tag
 
 imagePullSecrets: []
 nameOverride: "sample-node-app"
