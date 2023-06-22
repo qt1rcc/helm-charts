@@ -45,7 +45,7 @@ jobs:
       - name: Set docker image version
         uses: mikefarah/yq@master
         with:
-          cmd: yq -i '$CONCATENATEDCOMPONENTPATH.image.tag = "${{ github.event.inputs.version }}"' 'charts/${{ github.event.inputs.appName }}/values.yaml'
+          cmd: yq -i '.${{ env.CONCATENATEDCOMPONENTPATH }}.image.tag = "${{ github.event.inputs.version }}"' 'charts/${{ github.event.inputs.appName }}/values.yaml'
 
       - name: Get chart current version
         uses: mikefarah/yq@master
@@ -63,7 +63,7 @@ jobs:
       - name: Update Chart version
         uses: mikefarah/yq@master
         with:
-          cmd: yq -i 'version = "${{ steps.bump_version.outputs.next-version }}"' 'charts/${{ github.event.inputs.appName }}/Chart.yaml'
+          cmd: yq -i '.version = "${{ steps.bump_version.outputs.next-version }}"' 'charts/${{ github.event.inputs.appName }}/Chart.yaml'
           
       - name: Create Pull Request
         id: cpr
