@@ -1,5 +1,10 @@
 name: Manifest auto updater (non-production)
 
+env:
+  concatenatedMessageString: ''
+  concatenateComponentPath: ''
+  
+
 on:
   workflow_dispatch:
     inputs:
@@ -35,22 +40,41 @@ jobs:
         id: concat
         run: |
           if [ -n "${{ github.event.inputs.appComponent }}" ]; then
-            echo "::set-output name=concatenatedMessageString::Update ${{ github.event.inputs.appName }}_${{ github.event.inputs.appComponent }} image Version to ${{ github.event.inputs.version }}"
-            echo "::set-output name=concatenateComponentPath::${{ github.event.inputs.appName }}_${{ github.event.inputs.appComponent }}"
+            echo "::set-env concatenatedMessageString='Update ${{ github.event.inputs.appName }}_${{ github.event.inputs.appComponent }} image Version to ${{ github.event.inputs.version }}'"
+            echo "::set-env concatenateComponentPath='${{ github.event.inputs.appName }}_${{ github.event.inputs.appComponent }}'"
           else
-            echo "::set-output name=concatenatedMessageString::Update ${{ github.event.inputs.appName }} image Version to ${{ github.event.inputs.version }}"
-            echo "::set-output name=concatenateComponentPath::${{ github.event.inputs.appName }}"
+            echo "::set-env concatenatedMessageString='Update ${{ github.event.inputs.appName }} image Version to ${{ github.event.inputs.version }}'"
+            echo "::set-env concatenateComponentPath='${{ github.event.inputs.appName }}'"
           fi
 
-      - name: Update image version in the related HelmChart values.yaml
+      - name: Set docker image version
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq -i '.${{ steps.concat.outputs.concatenateComponentPath }}.image.tag = "${{ github.event.inputs.version }}"' 'charts/${{ github.event.inputs.appName }}/values.yaml'
+
+      - name: Get chart current version
+        uses: mikefarah/yq@master
+        id: get_chart_version
+        with:
+          cmd: yq '.version' charts/${{ github.event.inputs.appName }}/Chart.yaml
+
+      - name: Bump release version
+        id: bump_version
+        uses: christian-draeger/increment-semantic-version@1.1.0
+        with:
+          current-version: '${{ steps.get_chart_version.outputs.result }}'
+          version-fragment: 'fix'
+          
+      - name: Update Chart version
         uses: fjogeleit/yaml-update-action@main
         with:
-          valueFile: 'values.yaml'
-          propertyPath: '${{ steps.concat.outputs.concatenateComponentPath }}.image.tag'
-          value: ${{ github.event.inputs.version }}
+          valueFile: 'Chart.yaml'
+          propertyPath: 'version'
+          value: ${{ steps.bump_version.outputs.next-version }}
           branch: '${{ github.event.inputs.appName }}-${{ github.event.inputs.ref }}'
           targetBranch: main
           masterBranchName: main
           createPR: true
           message: '${{ steps.concat.outputs.concatenatedMessageString }}'
           workDir: 'charts/${{ github.event.inputs.appName }}'
+          commitChange: true
