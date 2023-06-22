@@ -34,7 +34,7 @@ jobs:
           valueFile: 'charts/${{ github.event.inputs.appName }}/values.yaml'
           propertyPath: '${{ github.event.inputs.appName }}_frontend.image.tag'
           value: ${{ github.event.inputs.version }}
-          branch: main
+          branch: ${{ github.event.inputs.version }}
           createPR: true
           message: 'Update Image Version to ${{ github.event.inputs.version }}'
           
@@ -44,6 +44,6 @@ jobs:
           valueFile: 'charts/${{ github.event.inputs.appName }}/values.yaml'
           propertyPath: '${{ github.event.inputs.appName }}_backend.image.tag'
           value: ${{ github.event.inputs.version }}
-          branch: main
+          branch: ${{ github.event.inputs.version }}
           createPR: true
           message: 'Update Image Version to ${{ github.event.inputs.version }}' 
