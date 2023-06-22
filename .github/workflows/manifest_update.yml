@@ -12,6 +12,9 @@ on:
       appName:
         required: true
         type: string
+      appComponent:
+        required: false
+        type: string
 
 jobs:
   release:
