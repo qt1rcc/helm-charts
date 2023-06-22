@@ -61,15 +61,16 @@ jobs:
           version-fragment: 'bug'
           
       - name: Update Chart version
-        uses: fjogeleit/yaml-update-action@main
+        uses: mikefarah/yq@master
         with:
-          valueFile: 'Chart.yaml'
-          propertyPath: 'version'
-          value: ${{ steps.bump_version.outputs.next-version }}
+          cmd: yq -i 'version = "${{ steps.bump_version.outputs.next-version }}"' 'charts/${{ github.event.inputs.appName }}/Chart.yaml'
+          
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: Update report
           branch: '${{ github.event.inputs.appName }}-${{ github.event.inputs.ref }}'
-          targetBranch: main
-          masterBranchName: main
-          createPR: true
-          message: '${{ env.CONCATENATEDMESSAGESTRING }}'
-          workDir: 'charts/${{ github.event.inputs.appName }}'
-          commitChange: true
+          delete-branch: true
+          base: main
+          title: ${{ env.CONCATENATEDMESSAGESTRING }}
