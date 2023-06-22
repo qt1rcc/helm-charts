@@ -35,6 +35,7 @@ jobs:
           propertyPath: '${{ github.event.inputs.appName }}_frontend.image.tag'
           value: ${{ github.event.inputs.version }}
           branch: ${{ github.event.inputs.version }}
+          targetBranch: main
           createPR: true
           message: 'Update Image Version to ${{ github.event.inputs.version }}'
           
@@ -45,5 +46,6 @@ jobs:
           propertyPath: '${{ github.event.inputs.appName }}_backend.image.tag'
           value: ${{ github.event.inputs.version }}
           branch: ${{ github.event.inputs.version }}
+          targetBranch: main
           createPR: true
           message: 'Update Image Version to ${{ github.event.inputs.version }}' 
