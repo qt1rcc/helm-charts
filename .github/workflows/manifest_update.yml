@@ -35,8 +35,8 @@ jobs:
         id: concat
         run: |
           if [ -n "${{ github.event.inputs.appComponent }}" ]; then
-            echo 'CONCATENATEDMESSAGESTRING="Update ${{ github.event.inputs.appName }}_${{ github.event.inputs.appComponent }} image Version to ${{ github.event.inputs.version }}"' >> $GITHUB_ENV
-            echo 'CONCATENATEDCOMPONENTPATH="${{ github.event.inputs.appName }}_${{ github.event.inputs.appComponent }}"' >> $GITHUB_ENV
+            echo "CONCATENATEDMESSAGESTRING='Update ${{ github.event.inputs.appName }}_${{ github.event.inputs.appComponent }} image Version to ${{ github.event.inputs.version }}'" >> $GITHUB_ENV
+            echo "CONCATENATEDCOMPONENTPATH='${{ github.event.inputs.appName }}_${{ github.event.inputs.appComponent }}'" >> $GITHUB_ENV
           else
             echo "CONCATENATEDMESSAGESTRING='Update ${{ github.event.inputs.appName }} image Version to ${{ github.event.inputs.version }}'" >> $GITHUB_ENV
             echo "CONCATENATEDCOMPONENTPATH='${{ github.event.inputs.appName }}'" >> $GITHUB_ENV
@@ -45,7 +45,7 @@ jobs:
       - name: Set docker image version
         uses: mikefarah/yq@master
         with:
-          cmd: yq -i '${{ env.CONCATENATEDCOMPONENTPATH }}.image.tag = "${{ github.event.inputs.version }}"' 'charts/${{ github.event.inputs.appName }}/values.yaml'
+          cmd: yq -i '$CONCATENATEDCOMPONENTPATH.image.tag = "${{ github.event.inputs.version }}"' 'charts/${{ github.event.inputs.appName }}/values.yaml'
 
       - name: Get chart current version
         uses: mikefarah/yq@master
