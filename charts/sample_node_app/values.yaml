@@ -7,7 +7,7 @@ db:
   image:
     repository: mongo
     pullPolicy: IfNotPresent
-    tag: 4.2.0
+    tag: 4.4.29
     port: 27017
 sample_node_app_frontend:
   image:
